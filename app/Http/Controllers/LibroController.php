@@ -1,8 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Bibliotecario;
-
-use App\Http\Controllers\Controller;
+namespace App\Http\Controllers;
 
 use Illuminate\Http\RedirectResponse;
 use App\Models\Libro;
@@ -16,6 +14,15 @@ class LibroController extends Controller
     /**
      * Display a listing of the resource.
      */
+
+    function __construct()
+    {
+        $this->middleware(['permission:libro-list|libro-create|libro-edit|libro-delete'], ['only' => ['index', 'show']]);
+        $this->middleware(['permission:libro-create'], ['only' => ['create', 'store']]);
+        $this->middleware(['permission:libro-edit'], ['only' => ['edit', 'update']]);
+        $this->middleware(['permission:libro-delete'], ['only' => ['destroy']]);
+    }
+    
     public function index(Request $request)
     {
         $busqueda = $request->busqueda;
@@ -27,9 +34,13 @@ class LibroController extends Controller
         $libros = Libro::all();
         $anos_academicos = Ano_Academico::all();
         $asignaturas = Asignatura::all();
-        return view('Bibliotecario.Libros', $data, compact('libros', 'anos_academicos', 'asignaturas'));
+        return view('libros.index ', $data, compact('libros', 'anos_academicos', 'asignaturas'));
     }
 
+    public function create()
+    {
+        return view('libros.create');
+    }
     /**
      * Store a newly created resource in storage.
      */
@@ -42,13 +53,10 @@ class LibroController extends Controller
             'id_asignatura' => 'required'
         ]);
 
-        $libros=new Libro;
-        $libros->titulo=$request->input('titulo');
-        $libros->id_ano_academico=$request->input('id_ano_academico');
-        $libros->id_asignatura=$request->input('id_asignatura');
-        $libros->save();
+        Libro::create($request->all());
+
         notify()->success('El Libro se ha Agregado Satisfactoriamente', 'LIBRO AGREGADO');
-        return redirect()->route('libros');
+        return redirect()->route('libros.index');
     }
 
     /**

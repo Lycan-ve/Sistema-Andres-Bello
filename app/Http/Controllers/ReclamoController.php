@@ -1,7 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Bibliotecario;
-use App\Http\Controllers\Controller;
+namespace App\Http\Controllers;
 
 use Illuminate\Http\RedirectResponse;
 

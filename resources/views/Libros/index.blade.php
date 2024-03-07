@@ -29,9 +29,6 @@
     </div>
 
                     <!-- Control Table -->
-        
-        @if ($errors->any())
-        @endif
 
             <table class="w-full text-base text-left rtl:text-right text-gray-500 dark:text-gray-400">
                         <thead class="text-base text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
