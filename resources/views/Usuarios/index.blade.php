@@ -52,7 +52,7 @@
                                     <td class="px-6 py-4 text-center text-black">
                                         @if(!empty($usuario->getRoleNames()))
                                         @foreach($usuario->getRoleNames() as $rolNombre)                                       
-                                        <h5><span class="badge badge-dark">{{ $rolNombre }}</span></h5>
+                                        {{ $rolNombre }}
                                         @endforeach
                                         @endif
                                     </td>

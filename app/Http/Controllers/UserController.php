@@ -51,7 +51,7 @@ class UserController extends Controller
     
         $user = User::create($input);
         $user->assignRole($request->input('roles'));
-    
+        notify()->success('El Usuario se ha Agregado Satisfactoriamente', 'USUARIO AGREGADO');
         return redirect()->route('Usuarios.index')
                         ->with('success','User created successfully');
     }
