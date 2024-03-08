@@ -36,7 +36,11 @@ class DatabaseSeeder extends Seeder
             'password' => Hash::make('123456789')
         ]);
 
-        $role = Role::create(['name' => 'Admin']);
+        $role = Role::create(['name' => 'Administrador']);
+        $role->givePermissionTo(['role-create', 'role-edit', 'role-delete', 'role-list', 'libro-list']);
+
+        $role2 = Role::create(['name' => 'Docente Bibliotecario']);
+        $role2->givePermissionTo([ 'libro-list', 'libro-create', 'libro-edit', 'libro-delete']);
 
         $permissions = Permission::pluck('id', 'id')->all();
 

@@ -19,14 +19,18 @@
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Panel') }}
                     </x-nav-link>
-                    
-                    <x-nav-link :href="route('Libros.index')" :active="request()->routeIs('Libros.index')">
-                        {{ __('Libros') }}    
-                    </x-nav-link>
 
-                    <x-nav-link :href="route('Usuarios.index')" :active="request()->routeIs('Usuarios.index')">
-                        {{ __('Usuarios') }}    
-                    </x-nav-link>
+                @can('libro-list')
+                <x-nav-link :href="route('Libros.index')" :active="request()->routeIs('Libros.index')">
+                    {{ __('Libros') }}    
+                </x-nav-link>
+                @endcan
+                    
+                @can('role-list')
+                <x-nav-link :href="route('Usuarios.index')" :active="request()->routeIs('Usuarios.index')">
+                    {{ __('Usuarios') }}    
+                </x-nav-link>
+                @endcan
                     </div>
                 </div>
                 

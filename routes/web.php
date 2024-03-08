@@ -17,13 +17,13 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-Route::get('/auth.login', function () {
-    return view('login');
-})->middleware(['auth']) ->name('login');
+Route::get('/', function () {
+    return view('auth.login');
+})->name('login');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
-})->middleware(['auth']) ->name('dashboard');
+})->middleware(['auth'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
 

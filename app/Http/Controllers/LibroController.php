@@ -39,7 +39,7 @@ class LibroController extends Controller
 
     public function create()
     {
-        return view('libros.create');
+        //
     }
     /**
      * Store a newly created resource in storage.
@@ -56,7 +56,7 @@ class LibroController extends Controller
         Libro::create($request->all());
 
         notify()->success('El Libro se ha Agregado Satisfactoriamente', 'LIBRO AGREGADO');
-        return redirect()->route('libros.index');
+        return redirect()->route('Libros.index');
     }
 
     /**

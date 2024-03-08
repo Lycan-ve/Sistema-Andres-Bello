@@ -23,8 +23,9 @@ class UserController extends Controller
      */
     public function index()
     {
-        $data = User::latest()->paginate(5);
-        return view('usuarios.index',compact('data'));
+        $usuarios = User::latest('id')->paginate(5);
+        $roles = Role::pluck('name','name')->all();
+        return view('usuarios.index',compact('usuarios', 'roles'));
     }
 
     /**
@@ -60,12 +61,7 @@ class UserController extends Controller
      */
     public function show(string $id)
     {
-        $role = Role::find($id);
-        $rolePermissions = Permission::join("role_has_permissions", "role_has_permissions.permission_id", "=", "permissions.id")
-            ->where("role_has_permissions.role_id", $id)
-            ->get();
-
-        return view('roles.show', compact('role', 'rolePermissions'));
+        //
     }
 
     /**
