@@ -35,6 +35,9 @@
                                 <th scope="col" class="text-center px-6 py-3">
                                     Rol
                                 </th>
+                                <th scope="col" class="text-center px-6 py-3">
+                                    Acciones
+                                </th>
                             </tr>
                         </thead>
                         <tbody>
@@ -56,11 +59,20 @@
                                         @endforeach
                                         @endif
                                     </td>
+                                    <td class="px-6 py-4 text-center text-black">
+                                        <button href="{{route('Usuarios.edit',$usuario->id)}}" data-bs-toggle="modal" data-bs-target="#ModalEdit">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-nut-fill" viewBox="0 0 16 16">
+                                                <path d="M4.58 1a1 1 0 0 0-.868.504l-3.428 6a1 1 0 0 0 0 .992l3.428 6A1 1 0 0 0 4.58 15h6.84a1 1 0 0 0 .868-.504l3.429-6a1 1 0 0 0 0-.992l-3.429-6A1 1 0 0 0 11.42 1zm5.018 9.696a3 3 0 1 1-3-5.196 3 3 0 0 1 3 5.196"/>
+                                            </svg>
+                                        </button>
+                                    </td>
                                     @endforeach
                                 </tr>
                             </tbody>
                     </table>
                 </div>
 @include('Usuarios.modal.create')
+@include('Usuarios.modal.edit')
+
 </x-app-layout>
 
