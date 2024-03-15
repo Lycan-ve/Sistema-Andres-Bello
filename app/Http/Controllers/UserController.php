@@ -81,6 +81,8 @@ class UserController extends Controller
 
     public function update(Request $request, $id)
     {
+        notify()->error('ERROR AL EDITAR USUARIO');
+
         $this->validate($request, [
             'name' => 'required',
             'email' => 'required|email|unique:users,email,'.$id,
@@ -94,14 +96,15 @@ class UserController extends Controller
         }else{
             $input = Arr::except($input,array('password'));    
         }
-    
+        
         $user = User::find($id);
         $user->update($input);
         DB::table('model_has_roles')->where('model_id',$id)->delete();
     
         $user->assignRole($request->input('roles'));
-    
-        return redirect()->route('usuarios.index');
+        notify()->success('USUARIO EDITADO');
+
+        return redirect()->route('Usuarios.index');
     }
 
     /**

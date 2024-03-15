@@ -60,19 +60,26 @@
                                         @endif
                                     </td>
                                     <td class="px-6 py-4 text-center text-black">
-                                        <button href="{{route('Usuarios.edit',$usuario->id)}}" data-bs-toggle="modal" data-bs-target="#ModalEdit">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-nut-fill" viewBox="0 0 16 16">
+                                        <button data-bs-toggle="modal" data-bs-target="#ModalEdit{{$usuario->id}}">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-nut-fill" viewBox="0 0 16 16">
                                                 <path d="M4.58 1a1 1 0 0 0-.868.504l-3.428 6a1 1 0 0 0 0 .992l3.428 6A1 1 0 0 0 4.58 15h6.84a1 1 0 0 0 .868-.504l3.429-6a1 1 0 0 0 0-.992l-3.429-6A1 1 0 0 0 11.42 1zm5.018 9.696a3 3 0 1 1-3-5.196 3 3 0 0 1 3 5.196"/>
                                             </svg>
                                         </button>
+                                        @include('Usuarios.modal.edit')
+
+                                        <button class="mx-2" data-bs-target="#ModalDelete{{$usuario->id}}">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
+                                                <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5M8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5m3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0"/>
+                                            </svg>
+                                        </button>
                                     </td>
+                                    
                                     @endforeach
                                 </tr>
                             </tbody>
                     </table>
                 </div>
 @include('Usuarios.modal.create')
-@include('Usuarios.modal.edit')
 
 </x-app-layout>
 

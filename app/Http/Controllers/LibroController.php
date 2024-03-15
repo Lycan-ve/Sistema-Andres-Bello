@@ -72,7 +72,19 @@ class LibroController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        notify()->error('', 'ERROR AL EDITAR EL LIBRO');
+
+        $this->validate($request, [
+            'titulo' => 'required',
+            'id_ano_academico' => 'required',
+            'id_asignatura' => 'required'
+        ]);
+        $input = $request->all();
+        $libro = Libro::find($id);
+        $libro->update($input);
+        notify()->success('El Libro se ha Editado Satisfactoriamente', 'LIBRO EDITADO');
+
+        return redirect()->route('Libros.index');
     }
 
     /**
