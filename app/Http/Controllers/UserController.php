@@ -22,11 +22,12 @@ class UserController extends Controller
     /**
      * Display a listing of the resource.
      */
+
     public function index()
     {
         $usuarios = User::OrderBy('id')->paginate(5);
         $roles = Role::pluck('name','name')->all();
-        return view('usuarios.index',compact('usuarios', 'roles'));
+        return view('usuarios.index', compact('usuarios', 'roles'));
     }
 
     /**

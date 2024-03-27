@@ -2,9 +2,9 @@
     <div class="py-8">
         <div class="max-w-full mx-auto sm:px-6 lg:px-8">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
-                
+
                 <!--Table Libros-->
-                
+
                 <div class="p-6 text-gray-900 dark:text-gray-100">
                     <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
                         <div class="pb-4 bg-white dark:bg-gray-900">
@@ -18,7 +18,7 @@
 
                     <!-- Button Modal -->
             @can('libro-create')
-                
+
             <div class="absolute top-0 right-5 text-sm text-white">
                 <button class ="text-base bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg px-5 py-2.5 text-center dark:bg-black dark:hover:bg-black dark:focus:ring-black" data-bs-toggle="modal" data-bs-target="#ModalCreate">
                     Agregar Libro
@@ -45,9 +45,11 @@
                                 <th scope="col" class="text-center px-6 py-3">
                                     Asignatura
                                 </th>
+                                @can('libro-edit')
                                 <th scope="col" class="text-center px-6 py-3">
                                     Informacion
                                 </th>
+                                @endcan
                             </tr>
                         </thead>
                         <tbody>
@@ -63,6 +65,7 @@
                                 <td class="px-6 py-4 text-center text-black">
                                 {{ $libro->asignaturas->nombre}}
                                 </td>
+                                @can('libro-edit')
                                 <td class="px-6 py-4 text-center text-black">
 
                                     <button data-bs-toggle="modal" data-bs-target="#Modal">
@@ -81,6 +84,7 @@
                                             <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5M8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5m3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0"/>
                                         </svg>
                                     </button>
+                                    @endcan
                                     @include('Libros.modal.edit')
                                 </td>
                             </tr>

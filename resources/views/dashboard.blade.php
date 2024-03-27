@@ -11,7 +11,8 @@
                                 <span>
                                     <h5 class="text-4xl text-center font-bold tracking-tight text-gray-900 dark:text-white">BIENVENIDO</h5>
                                     <p class="mt-2 font-normal text-gray-700 dark:text-gray-400 text-center text-4xl">
-                                        {{ Auth::user()->name }}</p>
+                                            {{ auth()->user()->getRoleNames()[0]}} {{ auth()->user()->name}} 
+                                    </p>
                                 </span>
                             </a>
                             </div>
