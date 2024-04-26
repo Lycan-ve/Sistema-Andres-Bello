@@ -8,7 +8,7 @@
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
                     </svg>
                     <span class="sr-only">Close modal</span>
-                    </button>                       
+                    </button>
                 </div>
                     <!-- Modal Body -->
     <form action="{{route('Usuarios.update', $usuario->id)}}" method="post" enctype="multipart/form-data" class="p-4 md:p-5">
@@ -34,8 +34,8 @@
                     <div class="col-span-2">
                         <label for="Select" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Rol</label>
                         <select name="roles[]" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
-                            @foreach($roles as $role)
                             <option selected="roles">Seleccione el Rol</option>
+                            @foreach($roles as $role)
                                 <option value="{{$role}}">{{$role}}</option>
                             @endforeach
                         </select>
@@ -47,4 +47,4 @@
             </form>
         </div>
     </div>
-</div>                
+</div>

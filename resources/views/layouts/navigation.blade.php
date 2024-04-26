@@ -25,6 +25,12 @@
                     {{ __('Libros') }}    
                 </x-nav-link>
                 @endcan
+
+                @can('libro-list')
+                <x-nav-link :href="route('Reclamos.index')" :active="request()->routeIs('Reclamos.index')">
+                    {{ __('Reclamo') }}    
+                </x-nav-link>
+                @endcan
                     
                 @can('role-list')
                 <x-nav-link :href="route('Usuarios.index')" :active="request()->routeIs('Usuarios.index')">

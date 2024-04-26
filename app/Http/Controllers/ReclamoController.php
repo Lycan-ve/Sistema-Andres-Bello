@@ -30,7 +30,7 @@ class ReclamoController extends Controller
         $libros = Libro::all();
         $matricula = Matricula::all();
         $seccion = Seccion::all();
-        return view('Bibliotecario.Reclamo', $data, compact('reclamos', 'libros', 'matricula', 'seccion'));
+        return view('Reclamos.index', $data, compact('reclamos', 'libros', 'matricula', 'seccion'));
     }
 
     /**
@@ -56,7 +56,7 @@ class ReclamoController extends Controller
         $reclamos->id_seccion=$request->input('id_seccion');
         $reclamos->save();
         notify()->success('El Reclamo Se ha Realizado Satisfactoriamente', 'RECLAMO REALIZADO');
-        return redirect()->route('reclamo');
+        return redirect()->route('Reclamos.index');
     }
 
     /**

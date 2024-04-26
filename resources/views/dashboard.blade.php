@@ -2,16 +2,16 @@
 
     <div class="py-8">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                
+
                     <!-- Card Usuario -->
 
                     <div class="grid grid-cols-4 grid-rows-1 gap-4">
                         <div class="col-span-2 col-start-2">
                             <a class="flex justify-center p-3 bg-white border border-gray-300 rounded-lg">
                                 <span>
-                                    <h5 class="text-4xl text-center font-bold tracking-tight text-gray-900 dark:text-white">BIENVENIDO</h5>
+                                    <h5 class="text-4xl text-center font-bold tracking-tight text-gray-900 dark:text-white">Bienvenido - {{ auth()->user()->getRoleNames()[0]}}</h5>
                                     <p class="mt-2 font-normal text-gray-700 dark:text-gray-400 text-center text-4xl">
-                                            {{ auth()->user()->getRoleNames()[0]}} {{ auth()->user()->name}} 
+                                            {{ auth()->user()->name}}
                                     </p>
                                 </span>
                             </a>
