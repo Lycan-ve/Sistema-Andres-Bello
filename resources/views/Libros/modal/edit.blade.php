@@ -11,8 +11,7 @@
                     </button>                       
                 </div>
                 
-                <!-- Modal Body -->
-
+                        <!-- Modal Body -->
                 {{-- Formulario de Agregacion de un Libro --}}
             
                 <form action="{{route('Libros.update', $libro->id)}}" method="POST" enctype="multipart/form-data" class="p-4 md:p-5">

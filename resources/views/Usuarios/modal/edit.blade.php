@@ -10,7 +10,10 @@
                     <span class="sr-only">Close modal</span>
                     </button>
                 </div>
+
+        {{-- Formulario de Agregacion de un Libro --}}
                     <!-- Modal Body -->
+
     <form action="{{route('Usuarios.update', $usuario->id)}}" method="post" enctype="multipart/form-data" class="p-4 md:p-5">
             {{ method_field('patch') }}
             {{ csrf_field() }}

@@ -11,9 +11,9 @@
                     </button>                       
                 </div>
                 
-                <!-- Modal Body -->
-
-                {{-- Formulario de Agregacion de un Libro --}}
+                
+        {{-- Formulario de Agregacion de un Libro --}}
+                    <!-- Modal Body -->
             
                 <form method="post" class="p-4 md:p-5">
                     @csrf

@@ -6,6 +6,7 @@ use Illuminate\Http\RedirectResponse;
 use App\Models\Libro;
 use App\Models\Ano_Academico;
 use App\Models\Asignatura;
+use Illuminate\Support\Facades\DB;
 
 use Illuminate\Http\Request;
 
@@ -92,7 +93,9 @@ class LibroController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        DB::table("libros")->where('id', $id)->delete();
+        notify()->success('El Libro se ha Eliminado Satisfactoriamente','LIBRO ELIMINADO');
+        return redirect()->route('Libros.index');
     }
 
 }
