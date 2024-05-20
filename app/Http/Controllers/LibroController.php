@@ -23,7 +23,7 @@ class LibroController extends Controller
         $this->middleware(['permission:libro-edit'], ['only' => ['edit', 'update']]);
         $this->middleware(['permission:libro-delete'], ['only' => ['destroy']]);
     }
-    
+
     public function index(Request $request)
     {
         $busqueda = $request->busqueda;
@@ -47,17 +47,18 @@ class LibroController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
+        event(new Libro($libro));
+
         notify()->error('Verifique bien Las Caracteristicas antes de Agregar un Libro', 'ERROR AL AGREGAR LIBRO');
         $validated = $request->validate([
             'titulo' => 'required',
             'id_ano_academico' => 'required',
             'id_asignatura' => 'required'
         ]);
-
         Libro::create($request->all());
 
         notify()->success('El Libro se ha Agregado Satisfactoriamente', 'LIBRO AGREGADO');
-        return redirect()->route('Libros.index');
+        return redirect()->route('libros.index');
     }
 
     /**
