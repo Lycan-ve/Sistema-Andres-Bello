@@ -1,4 +1,5 @@
-<x-app-layout>
+@extends('layouts.app')
+@section('content')
     <div class="py-8">
         <div class="max-w-full mx-auto sm:px-6 lg:px-8">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
@@ -29,7 +30,7 @@
                                         </button>
                                     </div>
                                 @endcan
-                                <form method="GET">
+                                <form action="/Libros" method="GET">
                                     <input type="text" name="busqueda"
                                         class="block ml-1 pt-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                         type="search" placeholder="Buscar Libro" aria-describedby="button-search">
@@ -40,8 +41,7 @@
                         <!-- Control Table -->
 
                         <table class="w-full text-base text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                            <thead
-                                class="text-base text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                            <thead class="text-base text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                                 <tr>
                                     <th scope="col" class="text-center px-6 py-3">
                                         Titulo
@@ -59,9 +59,9 @@
                                     @endcan
                                 </tr>
                             </thead>
-                            <tbody>
 
-                                @foreach ($libros as $libro)
+                            @foreach ($libros as $libro)
+                                <tbody>
                                     <tr
                                         class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 text-sm">
                                         <th scope="row"
@@ -74,6 +74,7 @@
                                         <td class="px-6 py-4 text-center text-black">
                                             {{ $libro->asignaturas->nombre }}
                                         </td>
+
                                         @can('libro-edit')
                                             <td class="px-6 py-4 text-center text-black">
 
@@ -94,8 +95,7 @@
                                                             d="M4.58 1a1 1 0 0 0-.868.504l-3.428 6a1 1 0 0 0 0 .992l3.428 6A1 1 0 0 0 4.58 15h6.84a1 1 0 0 0 .868-.504l3.429-6a1 1 0 0 0 0-.992l-3.429-6A1 1 0 0 0 11.42 1zm5.018 9.696a3 3 0 1 1-3-5.196 3 3 0 0 1 3 5.196" />
                                                     </svg>
                                                 </button>
-                                                <button data-bs-toggle="modal"
-                                                    data-bs-target="#ModalDelete{{ $libro->id }}">
+                                                <button data-bs-toggle="modal" data-bs-target="#ModalDelete{{ $libro->id }}">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
                                                         fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
                                                         <path
@@ -103,12 +103,13 @@
                                                     </svg>
                                                 </button>
                                             @endcan
-                                            @include('Libros.modal.edit')
+                                        </td>
+                                        @include('Libros.modal.edit')
+                                        @include('Libros.modal.delete')
                                     </tr>
-                                    @include('Libros.modal.delete')
-                                    </td>
-                                @endforeach
-                            </tbody>
+                                </tbody>
+                            @endforeach
+
                             <tfoot>
                                 <tr>
                                     <td colspan="5" class="p-2">{{ $libros->links() }}</td>
@@ -119,4 +120,4 @@
                 </div>
             </div>
             @include('Libros.modal.create')
-</x-app-layout>
+        @endsection

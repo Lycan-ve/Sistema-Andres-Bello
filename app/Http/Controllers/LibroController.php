@@ -28,8 +28,19 @@ class LibroController extends Controller
     {
         $busqueda = $request->busqueda;
         $libros = Libro::where('titulo', 'LIKE','%'.$busqueda.'%')
-                ->latest('id')
-                ->paginate(10);
+        // ->whereHas('asignaturas',function($query) use ($busqueda) {
+        //     $query->where('nombre', 'LIKE', '%'.$busqueda.'%');
+        // })
+        // ->whereHas('ano_academico', function ($query) use ($busqueda) {
+        //     $query->where('nombre', 'LIKE', '%'.$busqueda.'%');
+        // })
+        ->paginate(10);
+
+        // $libros = Libro::where('titulo', 'LIKE','%'.$busqueda.'%')
+        //         ->orWhere('id_asignaturas', 'LIKE', '%'.$busqueda.'%')
+        //         ->orWhere('id_ano_academico', 'LIKE', '%'.$busqueda.'%')
+        //         ->paginate(10);
+
         $data = ['libros' => $libros,];
 
         $libros = Libro::all();

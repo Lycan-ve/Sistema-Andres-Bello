@@ -17,7 +17,7 @@ class UserController extends Controller
         $this->middleware(['permission:role-create'], ['only' => ['create', 'store']]);
         $this->middleware(['permission:role-edit'], ['only' => ['edit', 'update']]);
         $this->middleware(['permission:role-delete'], ['only' => ['destroy']]);
-        
+
     }
     /**
      * Display a listing of the resource.
@@ -25,7 +25,7 @@ class UserController extends Controller
 
     public function index()
     {
-        $usuarios = User::OrderBy('id')->paginate(5);
+        $usuarios = User::OrderBy('id')->paginate(10);
         $roles = Role::pluck('name','name')->all();
         return view('usuarios.index', compact('usuarios', 'roles'));
     }
@@ -34,11 +34,11 @@ class UserController extends Controller
      * Store a newly created resource in storage.
      */
     public function create() {
-        
+
         $roles = Role::pluck('name','name')->all();
         return view('usuarios.create',compact('roles'));
     }
-    
+
     public function store(Request $request)
     {
         $this->validate($request, [
@@ -47,10 +47,10 @@ class UserController extends Controller
             'password' => 'required|same:confirm-password',
             'roles' => 'required'
         ]);
-    
+
         $input = $request->all();
         $input['password'] = Hash::make($input['password']);
-    
+
         $user = User::create($input);
         $user->assignRole($request->input('roles'));
         notify()->success('El Usuario se ha Agregado Satisfactoriamente', 'USUARIO AGREGADO');
@@ -75,7 +75,7 @@ class UserController extends Controller
         $user = User::find($id);
         $roles = Role::pluck('name','name')->all();
         $userRole = $user->roles->pluck('name','name')->all();
-    
+
         return view('Usuarios.edit ',compact('user','roles','userRole'));
     }
 
@@ -90,18 +90,18 @@ class UserController extends Controller
             'password' => 'same:confirm-password',
             'roles' => 'required'
         ]);
-    
+
         $input = $request->all();
-        if(!empty($input['password'])){ 
+        if(!empty($input['password'])){
             $input['password'] = Hash::make($input['password']);
         }else{
-            $input = Arr::except($input,array('password'));    
+            $input = Arr::except($input,array('password'));
         }
-        
+
         $user = User::find($id);
         $user->update($input);
         DB::table('model_has_roles')->where('model_id',$id)->delete();
-    
+
         $user->assignRole($request->input('roles'));
         notify()->success('USUARIO EDITADO');
 

@@ -1,5 +1,5 @@
-<x-app-layout>
-
+@extends('layouts.app')
+@section('content')
     <div class="py-8">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
 
@@ -62,7 +62,7 @@
     </div>
     </div>
     </div>
-</x-app-layout>
+@endsection
 
 <!-- <a class="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow ">
 <h5 class="mb-2 text-2xl font-bold tracking-tight text-center text-gray-900 dark:text-white">USUARIO</h5>
