@@ -103,7 +103,7 @@ class UserController extends Controller
         DB::table('model_has_roles')->where('model_id',$id)->delete();
 
         $user->assignRole($request->input('roles'));
-        notify()->success('USUARIO EDITADO');
+        notify()->success('El Usuario Fue Editado Satisfactoriamente' ,'USUARIO EDITADO');
 
         return redirect()->route('Usuarios.index');
     }
@@ -113,8 +113,8 @@ class UserController extends Controller
      */
     public function destroy(string $id)
     {
-        DB::table("roles")->where('id', $id)->delete();
-        return redirect()->route('roles.index')
-            ->with('success', 'Role deleted successfully');
+        DB::table("users")->where('id', $id)->delete();
+        notify()->success( 'El Usuario se ha Eliminado Satisfactoriamente' ,'USUARIO ELIMINADO');
+        return redirect()->route('Usuarios.index');
     }
 }

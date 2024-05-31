@@ -1,8 +1,7 @@
 <form action="{{ route('Libros.update', $libro->id) }}" method="POST" enctype="multipart/form-data">
     {{ method_field('patch') }}
     {{ csrf_field() }}
-    <div class="modal fade" id="ModalEdit{{ $libro->id }}" tabindex="-1" role="dialog" aria-hidden="true"
-        aria-hidden="true">
+    <div class="modal fade" id="ModalEdit{{ $libro->id }}" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
