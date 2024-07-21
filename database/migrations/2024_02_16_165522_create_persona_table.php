@@ -16,18 +16,13 @@ return new class extends Migration
             $table->string('nombre');
             $table->unsignedBigInteger('cedula');
             $table->unsignedBigInteger('id_matricula');
-            $table->unsignedBigInteger('id_ano_academico');
             $table->unsignedBigInteger('id_seccion');
             $table->timestamps();
-            
-            
-            $table->foreign('id_matricula')    
+
+
+            $table->foreign('id_matricula')
             ->references('id')
             ->on('matricula');
-            
-            $table->foreign('id_ano_academico')
-                ->references('id')
-                ->on('ano_academico');
 
             $table->foreign('id_seccion')
                 ->references('id')

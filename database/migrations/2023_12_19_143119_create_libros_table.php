@@ -17,12 +17,13 @@ return new class extends Migration
         $table->string('titulo');
         $table->unsignedBigInteger('id_ano_academico');
         $table->unsignedBigInteger('id_asignatura');
+        $table->integer('cantidad');
 
         $table->foreign('id_ano_academico')
                 ->references('id')
                 ->on('ano_academico');
 
-        
+
         $table->foreign('id_asignatura')
                 ->references('id')
                 ->on('asignaturas');

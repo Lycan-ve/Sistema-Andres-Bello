@@ -8,11 +8,13 @@
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
                     </svg>
                     <span class="sr-only">Close modal</span>
-                    </button>                       
+                    </button>
                 </div>
                     <!-- Modal Body -->
     <form method="post" class="p-4 md:p-5">
         @csrf
+        <div class="flex justify-center">Libro a Seleccionar</div>
+        <hr class="mb-3" title=""/>
                 <div class="grid gap-4 mb-4 grid-cols-2">
                 <div class="col-span-2">
                     <label for="Select" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Libro</label>
@@ -23,9 +25,26 @@
                             @endforeach
                         </select>
                     </div>
-                    <div class="col-span-2 sm:col-span-1">
+                </div>
+                <div class="flex justify-center">Datos del Reclamante</div>
+                <hr class="mb-3" title=""/>
+                <div class="grid gap-4 mb-4 grid-cols-2">
+                    <div class="col-span-2">
                         <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nombre del Reclamante</label>
                         <input type="text" name="nombre" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Nombre/Apellido" required="">
+                    </div>
+                    <div class="col-span-2 sm:col-span-1">
+                        <label for="Select" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Año Academico</label>
+                        <select name="id_ano_academico" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                            <option selected="Libro">Seleccione el Año Academico</option>
+                            @foreach($ano_academico as $ano)
+                                <option value="{{$ano->id}}">{{$ano->nombre}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    <div class="col-span-2 sm:col-span-1">
+                        <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Cedula</label>
+                        <input type="text" name="cedula" id="cedula" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Cedula" required="">
                     </div>
                     <div class="col-span-2 sm:col-span-1">
                         <label for="Select" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Matricula</label>
@@ -35,10 +54,6 @@
                             <option value="{{$matriculas->id}}">{{$matriculas->nombre}}</option>
                             @endforeach
                         </select>
-                    </div>
-                    <div class="col-span-2 sm:col-span-1">
-                        <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Cedula</label>
-                        <input type="text" name="cedula" id="cedula" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Cedula" required="">
                     </div>
                     <div class="col-span-2 sm:col-span-1">
                         <label for="Select" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Sección</label>
