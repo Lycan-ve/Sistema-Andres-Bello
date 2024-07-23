@@ -16,6 +16,7 @@ return new class extends Migration
 
             $table->unsignedBigInteger('id_libros');
             $table->unsignedBigInteger('id_ano_academico');
+            $table->integer('cantidad');
 
 
             $table->foreign('id_libros')

@@ -47,6 +47,9 @@
                                         Sección
                                     </th>
                                     <th scope="col" class="text-center px-6 py-3">
+                                        Cantidad
+                                    </th>
+                                    <th scope="col" class="text-center px-6 py-3">
                                         Fecha de Emision
                                     </th>
                                     <th scope="col" class="text-center px-6 py-3">
@@ -57,6 +60,7 @@
                             <tbody>
 
                                 @foreach ($reclamos as $reclamo)
+                                @foreach ($persona as $personas)
                                     <tr
                                         class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 text-sm">
                                         <td class="px-6 py-4 font-medium text-center text-gray-900 whitespace-nowrap dark:text-white">
@@ -65,8 +69,6 @@
                                         <td class="px-6 py-4 text-center text-black">
                                             {{ $reclamo->ano_academico->nombre }}
                                         </td>
-                                        @endforeach
-                                        @foreach ($persona as $personas)
                                         <td class="px-6 py-4 text-center text-black">
                                             {{ $personas->nombre }}
                                         </td>
@@ -77,12 +79,16 @@
                                             {{ $personas->matricula->nombre}}
                                         </td>
                                         <td class="px-6 py-4 text-center text-black">
-                                            {{ $personas->seccion->nombre ?? ''}}
+                                            {{ $personas->seccion->nombre}}
+                                        </td>
+                                        <td class="px-6 py-4 text-center text-black">
+                                            {{ $reclamo->cantidad}}
                                         </td>
                                         <td class="px-6 py-4 text-center text-black">
                                             {{ $reclamo->created_at }}
                                         </td>
                                     </tr>
+                                @endforeach
                                 @endforeach
                             </tbody>
                         </table>

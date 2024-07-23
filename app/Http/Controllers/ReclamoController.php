@@ -43,11 +43,22 @@ class ReclamoController extends Controller
             'cedula' => 'required',
             'id_matricula' => 'required',
             'id_seccion' => 'required',
+            'cantidad' => 'required'
         ]);
 
+        $libroId = $request->input('id_libros');
+        $cantidad = $request->input('cantidad');
+
+       $libro = Libro::find($libroId);
+       if ($libro->cantidad >= $cantidad) {
+           $libro->cantidad -= $cantidad;
+           $libro->save();
+    }
+
         Reclamo::create([
-            'id_libros'=> $data['id_libros'],
-            'id_ano_academico' => $data['id_ano_academico']
+            'id_libros'=> $libroId,
+            'id_ano_academico' => $data['id_ano_academico'],
+            'cantidad' => $cantidad
         ]);
 
         Persona::create([
@@ -59,7 +70,8 @@ class ReclamoController extends Controller
 
         notify()->success('El Reclamo Se ha Realizado Satisfactoriamente', 'RECLAMO REALIZADO');
         return redirect()->route('Reclamos.index');
-    }
+
+}
 
     /**
      * Display the specified resource.

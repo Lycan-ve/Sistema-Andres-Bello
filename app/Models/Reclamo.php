@@ -14,7 +14,7 @@ class Reclamo extends Model
 
     protected $table='reclamo';
     protected $primaryKey="id";
-    protected $fillable = ['id_libros', 'id_ano_academico', 'fecha_emisión', 'fecha_entrega'];
+    protected $fillable = ['id_libros', 'id_ano_academico', 'cantidad', 'fecha_emisión', 'fecha_entrega'];
 
 
     //Relacion uno a muchos (Inversa)
