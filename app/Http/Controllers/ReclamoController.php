@@ -53,6 +53,7 @@ class ReclamoController extends Controller
        if ($libro->cantidad >= $cantidad) {
            $libro->cantidad -= $cantidad;
            $libro->save();
+           
     }
 
         Reclamo::create([
