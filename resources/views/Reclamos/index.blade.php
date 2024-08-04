@@ -47,13 +47,7 @@
                                         Sección
                                     </th>
                                     <th scope="col" class="text-center px-6 py-3">
-                                        Cantidad
-                                    </th>
-                                    <th scope="col" class="text-center px-6 py-3">
-                                        Fecha de Emision
-                                    </th>
-                                    <th scope="col" class="text-center px-6 py-3">
-                                        Fecha de Entrega
+                                        Fecha Tope
                                     </th>
                                 </tr>
                             </thead>
@@ -63,34 +57,50 @@
                                 @foreach ($persona as $personas)
                                     <tr
                                         class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 text-sm">
-                                        <td class="px-6 py-4 font-medium text-center text-gray-900 whitespace-nowrap dark:text-white">
+                                        <th scope="row"
+                                            class="px-6 py-4 font-medium text-center text-gray-900 whitespace-nowrap dark:text-white">
                                             {{ $reclamo->libros->titulo }}
+                                        </th>
+                                        <td class="px-6 py-4 text-center text-black">
+                                            {{ $reclamo->nombre }}
                                         </td>
                                         <td class="px-6 py-4 text-center text-black">
-                                            {{ $reclamo->ano_academico->nombre }}
+                                            {{ $reclamo->cedula }}
                                         </td>
                                         <td class="px-6 py-4 text-center text-black">
-                                            {{ $personas->nombre }}
+                                            {{ $reclamo->matricula->nombre }}
                                         </td>
                                         <td class="px-6 py-4 text-center text-black">
-                                            {{ $personas->cedula ?? 'No Posee Cedula'}}
+                                            {{ $reclamo->seccion->nombre }}
                                         </td>
                                         <td class="px-6 py-4 text-center text-black">
-                                            {{ $personas->matricula->nombre}}
+                                            {{ $reclamo->fecha_tope ?? 'X' }}
                                         </td>
                                         <td class="px-6 py-4 text-center text-black">
-                                            {{ $personas->seccion->nombre}}
-                                        </td>
-                                        <td class="px-6 py-4 text-center text-black">
-                                            {{ $reclamo->cantidad}}
-                                        </td>
-                                        <td class="px-6 py-4 text-center text-black">
-                                            {{ $reclamo->created_at }}
+
+
+                                            <button type="button"
+                                                class="btn-close text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
+                                                data-bs-dismiss="modal" aria-label="Close">
+                                                <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                                    viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+                                                    class="w-8 h-8">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z" />
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                                                </svg>
+                                            </button>
+
                                         </td>
                                     </tr>
                                 @endforeach
-                                @endforeach
                             </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td colspan="5" class="p-2">{{ $reclamos->links() }}</td>
+                                </tr>
+                            </tfoot>
                         </table>
                     </div>
                 </div>

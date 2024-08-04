@@ -4,7 +4,6 @@ namespace App\Models;
 
 use App\Models\Ano_Academico;
 use App\Models\Asignatura;
-use App\Models\Reclamo;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -27,9 +26,5 @@ class Libro extends Model
 
     public function asignaturas() {
         return $this->belongsTo(Asignatura::class, 'id_asignatura');
-    }
-
-    public function reclamo(){
-        return $this->hasMany(Reclamo::class, 'id');
     }
 }

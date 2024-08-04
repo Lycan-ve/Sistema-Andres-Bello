@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('persona', function (Blueprint $table) {
             $table->id();
             $table->string('nombre');
-            $table->unsignedBigInteger('cedula');
+            $table->unsignedBigInteger('cedula')->nullable();;
             $table->unsignedBigInteger('id_matricula');
             $table->unsignedBigInteger('id_seccion');
             $table->timestamps();

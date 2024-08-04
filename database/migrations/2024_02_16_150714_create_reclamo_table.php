@@ -13,24 +13,29 @@ return new class extends Migration
     {
         Schema::create('reclamo', function (Blueprint $table) {
             $table->id();
-
             $table->unsignedBigInteger('id_libros');
-            $table->unsignedBigInteger('id_ano_academico');
-            $table->integer('cantidad');
+            $table->string('nombre');
+            $table->unsignedBigInteger('cedula');
+            $table->unsignedBigInteger('id_matricula');
+            $table->unsignedBigInteger('id_seccion');
 
 
             $table->foreign('id_libros')
             ->references('id')
             ->on('libros');
 
-            $table->foreign('id_ano_academico')
-            ->references('id')
-            ->on('ano_academico');
+                $table->foreign('id_matricula')
+                ->references('id')
+                ->on('matricula');
 
+            $table->foreign('id_seccion')
+                ->references('id')
+                ->on('seccion');
+
+
+            $table->date('fecha_tope');
 
             $table->timestamps();
-            $table->date('fecha_entrega');
-
         });
     }
 

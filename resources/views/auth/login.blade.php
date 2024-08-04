@@ -7,7 +7,7 @@
 
         <!-- Email Address -->
         <div class="flex min-h-full flex-col justify-center px-6 py-5 ">
-    
+
         <div class="sm:mx-auto sm:w-full sm:max-w-sm">
         <h2 class="mt-10 text-center text-6xl font-bold tracking-tight text-gray-900">INICIAR SECCION</h2>
     </div>
@@ -45,7 +45,7 @@
                 {{ __('Acceder') }}
             </x-primary-button>
         </div>
-        
+
         </div>
     </form>
 </x-guest-layout>

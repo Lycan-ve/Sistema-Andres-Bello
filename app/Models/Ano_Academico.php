@@ -14,9 +14,9 @@ class Ano_Academico extends Model
     protected $primaryKey="id";
     protected $fillable = ['nombre'];
     public $timestamps=false;
-    
+
     //Relacion de uno a muchos
-    
+
     public function libro(){
         return $this->hasMany(Libro::class, 'id');
     }

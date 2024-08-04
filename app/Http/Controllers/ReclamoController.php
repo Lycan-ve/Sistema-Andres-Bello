@@ -20,13 +20,18 @@ class ReclamoController extends Controller
      */
     public function index(Request $request)
     {
-        $persona = Persona::all();
+        $busqueda = $request->busqueda;
+        $reclamos = Reclamo::where('nombre', 'LIKE','%'.$busqueda.'%')
+                ->latest('id')
+                ->paginate(10);
+
+        $data = ['reclamos' => $reclamos];
+
         $reclamos = Reclamo::all();
         $libros = Libro::all();
         $matricula = Matricula::all();
-        $ano_academico = Ano_Academico::all();
         $seccion = Seccion::all();
-        return view('Reclamos.index', compact('reclamos', 'libros', 'matricula', 'seccion', 'ano_academico', 'persona'));
+        return view('Reclamos.index', $data, compact('reclamos', 'libros', 'matricula', 'seccion'));
     }
 
     /**
@@ -40,9 +45,19 @@ class ReclamoController extends Controller
             'id_libros' => 'required',
             'id_ano_academico' => 'required',
             'nombre' => 'required',
-            'cedula' => 'required',
+            'cedula' => 'nullable',
+            'id_ano_academico' => 'required',
             'id_matricula' => 'required',
             'id_seccion' => 'required',
+        ]);
+
+        $reclamos=new Reclamo;
+        $reclamos->id_libros=$request->input('id_libros');
+        $reclamos->nombre=$request->input('nombre');
+        $reclamos->cedula=$request->input('cedula');
+        $reclamos->id_matricula=$request->input('id_matricula');
+        $reclamos->id_seccion=$request->input('id_seccion');
+        $reclamos->save();
             'cantidad' => 'required'
         ]);
 
@@ -53,7 +68,7 @@ class ReclamoController extends Controller
        if ($libro->cantidad >= $cantidad) {
            $libro->cantidad -= $cantidad;
            $libro->save();
-           
+
     }
 
         Reclamo::create([
