@@ -112,5 +112,5 @@
                     </div>
                 </div>
             </div>
-            @include('Libros.modal.create')
-        @endsection
+    @include('Libros.modal.create')
+@endsection

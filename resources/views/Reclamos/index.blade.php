@@ -62,16 +62,19 @@
                                             {{ $reclamo->libros->titulo }}
                                         </th>
                                         <td class="px-6 py-4 text-center text-black">
-                                            {{ $reclamo->nombre }}
+                                            {{ $reclamo->ano_academico->nombre}}
                                         </td>
                                         <td class="px-6 py-4 text-center text-black">
-                                            {{ $reclamo->cedula }}
+                                            {{ $personas->nombre }}
                                         </td>
                                         <td class="px-6 py-4 text-center text-black">
-                                            {{ $reclamo->matricula->nombre }}
+                                            {{ $personas->cedula }}
                                         </td>
                                         <td class="px-6 py-4 text-center text-black">
-                                            {{ $reclamo->seccion->nombre }}
+                                            {{ $personas->matricula->nombre}}
+                                        </td>
+                                        <td class="px-6 py-4 text-center text-black">
+                                            {{ $personas->seccion->nombre}}
                                         </td>
                                         <td class="px-6 py-4 text-center text-black">
                                             {{ $reclamo->fecha_tope ?? 'X' }}
@@ -95,16 +98,12 @@
                                         </td>
                                     </tr>
                                 @endforeach
+                                @endforeach
                             </tbody>
-                            <tfoot>
-                                <tr>
-                                    <td colspan="5" class="p-2">{{ $reclamos->links() }}</td>
-                                </tr>
-                            </tfoot>
                         </table>
                     </div>
                 </div>
             </div>
         </div>
-        @include('Reclamos.modal.create')
-    @endsection
+    @include('Reclamos.modal.create')
+@endsection
