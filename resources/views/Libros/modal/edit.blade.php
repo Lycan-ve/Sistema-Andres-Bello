@@ -27,29 +27,36 @@
                         <input type="text" name="titulo" id="titulo"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                             placeholder="Nombre del Libro" required value="{{ $libro->titulo }}">
-
                     </div>
                     <div class="col-span-2 ">
                         <label for="Select" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Año
                             Academico</label>
-                        <select name="id_ano_academico" id=""
+                        <select name="id_ano_academico" id="id_ano_academico"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
-                            <option selected="anos" value="">Seleccione el Año Academico</option>
+                            <option selected="anos" value="">{{$libro->ano_academico->nombre}}</option>
                             @foreach ($anos_academicos as $anos)
-                                <option value="{{ $anos->id }}">{{ $anos->nombre }}</option>
+                                <option value={{ $anos->id }}>{{ $anos->nombre }}</option>
                             @endforeach
                         </select>
                     </div>
                     <div class="col-span-2">
                         <label for="Select"
                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Asignatura</label>
-                        <select name="id_asignatura" id= ""
+                        <select name="id_asignatura" id= "id_asignatura"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
-                            <option selected="asignaturas" value="">Seleccione La Asignatura</option>
+                            <option selected="asignaturas" value="">{{$libro->asignaturas->nombre}}</option>
                             @foreach ($asignaturas as $asignatura)
-                                <option value="{{ $asignatura->id }}">{{ $asignatura->nombre }}</option>
+                                <option value={{ $asignatura->id }}>{{ $asignatura->nombre }}</option>
                             @endforeach
                         </select>
+                    </div>
+
+                    <div class="col-span-2">
+                        <label for="name"
+                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Cantidad</label>
+                        <input type="text" name="cantidad" id="cantidad"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                            placeholder="Ingrese la Cantidad de Libros" required value="{{ $libro->cantidad }}">
                     </div>
                 </div>
                 <div class="modal-footer">

@@ -15,7 +15,7 @@ class Libro extends Model
 
     protected $table='libros';
     protected $primaryKey="id";
-    protected $fillable = ['titulo', 'id_ano_academico', 'id_asignatura'];
+    protected $fillable = ['titulo', 'id_ano_academico', 'id_asignatura', 'cantidad'];
     public $timestamps = true;
 
     //Relacion uno a muchos (Inversa)

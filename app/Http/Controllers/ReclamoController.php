@@ -21,17 +21,17 @@ class ReclamoController extends Controller
     public function index(Request $request)
     {
         $busqueda = $request->busqueda;
-        $persona = Persona::where('nombre', 'LIKE','%'.$busqueda.'%')
+        $reclamos = Reclamo::where('nombre', 'LIKE','%'.$busqueda.'%')
                 ->latest('id')
                 ->paginate(10);
+
+        $data = ['reclamos' => $reclamos];
 
         $reclamos = Reclamo::all();
         $libros = Libro::all();
         $matricula = Matricula::all();
-        $ano_academicos = Ano_Academico::all();
-        $persona = Persona::all();
         $seccion = Seccion::all();
-        return view('Reclamos.index', compact('reclamos', 'libros', 'matricula','seccion','ano_academicos','persona'));
+        return view('Reclamos.index', $data, compact('reclamos', 'libros', 'matricula', 'seccion'));
     }
 
     /**
@@ -43,32 +43,25 @@ class ReclamoController extends Controller
 
         $data = $request->validate([
             'id_libros' => 'required',
+            'id_ano_academico' => 'required',
             'nombre' => 'required',
             'cedula' => 'nullable',
             'id_ano_academico' => 'required',
             'id_matricula' => 'required',
             'id_seccion' => 'required',
-            'fecha_entrega' => 'required'
         ]);
 
-        Reclamo::create([
-            'id_libros' => $data['id_libros'],
-            'id_ano_academico' => $data['id_ano_academico'],
-            'fecha_emision' => now(),
-            'fecha_entrega' => now()->addDays($data['fecha_entrega'])
-        ]);
-
-        Persona::create([
-            'nombre' => $data['nombre'],
-            'cedula' => $data['cedula'],
-            'id_matricula' => $data['id_matricula'],
-            'id_seccion' => $data['id_seccion'],
-        ]);
-
-
+        $reclamos=new Reclamo;
+        $reclamos->id_libros=$request->input('id_libros');
+        $reclamos->nombre=$request->input('nombre');
+        $reclamos->cedula=$request->input('cedula');
+        $reclamos->id_matricula=$request->input('id_matricula');
+        $reclamos->id_seccion=$request->input('id_seccion');
+        $reclamos->save();
         notify()->success('El Reclamo Se ha Realizado Satisfactoriamente', 'RECLAMO REALIZADO');
         return redirect()->route('Reclamos.index');
-    }
+
+}
 
     /**
      * Display the specified resource.

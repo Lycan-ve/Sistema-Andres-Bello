@@ -2,10 +2,6 @@
 
 namespace App\Models;
 
-use App\Models\Ano_Academico;
-use App\Models\Matricula;
-use App\Models\Seccion;
-
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -15,16 +11,6 @@ class Persona extends Model
 
     protected $table='persona';
     protected $primaryKey="id";
-    protected $fillable = ['nombre', 'cedula', 'id_matricula', 'id_seccion'];
-    public $timestamps = false;
-
-    public function matricula() {
-        return $this->belongsTo(Matricula::class, 'id_matricula');
-    }
-
-    public function seccion() {
-        return $this->belongsTo(Seccion::class, 'id_seccion');
-    }
+    protected $fillable = ['nombre', 'cedula', 'id_matricula', 'id_ano_academico', 'id_seccion'];
+    public $timestamps = true;
 }
-
-

@@ -62,13 +62,14 @@ class LibroController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
-        /* event(new Libro($libro)); */
+        event(new Libro($libro));
 
         notify()->error('Verifique bien Las Caracteristicas antes de Agregar un Libro', 'ERROR AL AGREGAR LIBRO');
         $validated = $request->validate([
             'titulo' => 'required',
             'id_ano_academico' => 'required',
-            'id_asignatura' => 'required'
+            'id_asignatura' => 'required',
+            'cantidad' => 'required',
         ]);
         Libro::create($request->all());
 
@@ -94,7 +95,8 @@ class LibroController extends Controller
         $this->validate($request, [
             'titulo' => 'required',
             'id_ano_academico' => 'required',
-            'id_asignatura' => 'required'
+            'id_asignatura' => 'required',
+            'cantidad' => 'required'
         ]);
         $input = $request->all();
         $libro = Libro::find($id);
