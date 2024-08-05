@@ -7,7 +7,8 @@ use App\Models\Libro;
 use App\Models\Ano_Academico;
 use App\Models\Asignatura;
 use Illuminate\Support\Facades\DB;
-
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 
 class LibroController extends Controller
@@ -26,14 +27,17 @@ class LibroController extends Controller
 
     public function index(Request $request)
     {
-        $busqueda = $request->busqueda;
+        $busqueda = $request->get('busqueda');
+
         $libros = Libro::where('titulo', 'LIKE','%'.$busqueda.'%')
-        // ->whereHas('asignaturas',function($query) use ($busqueda) {
-        //     $query->where('nombre', 'LIKE', '%'.$busqueda.'%');
-        // })
-        // ->whereHas('ano_academico', function ($query) use ($busqueda) {
-        //     $query->where('nombre', 'LIKE', '%'.$busqueda.'%');
-        // })
+        ->whereHas('asignaturas', function($query) use ($busqueda) {
+            $query->where('nombre', 'LIKE', '%'.$busqueda.'%');
+        })
+
+        ->whereHas('ano_academico', function ($query) use ($busqueda) {
+            $query->where('nombre', 'LIKE', '%'.$busqueda.'%');
+        })
+
         ->paginate(10);
 
         // $libros = Libro::where('titulo', 'LIKE','%'.$busqueda.'%')
@@ -41,7 +45,7 @@ class LibroController extends Controller
         //         ->orWhere('id_ano_academico', 'LIKE', '%'.$busqueda.'%')
         //         ->paginate(10);
 
-        $data = ['libros' => $libros,];
+        $data = ['libros' => $libros];
 
         $libros = Libro::all();
         $anos_academicos = Ano_Academico::all();
@@ -58,7 +62,7 @@ class LibroController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
-        event(new Libro($libro));
+        /* event(new Libro($libro)); */
 
         notify()->error('Verifique bien Las Caracteristicas antes de Agregar un Libro', 'ERROR AL AGREGAR LIBRO');
         $validated = $request->validate([
@@ -69,7 +73,7 @@ class LibroController extends Controller
         Libro::create($request->all());
 
         notify()->success('El Libro se ha Agregado Satisfactoriamente', 'LIBRO AGREGADO');
-        return redirect()->route('libros.index');
+        return redirect()->route('Libros.index');
     }
 
     /**
