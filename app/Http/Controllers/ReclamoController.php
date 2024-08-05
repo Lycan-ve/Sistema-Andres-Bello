@@ -44,6 +44,7 @@ class ReclamoController extends Controller
             'id_ano_academico' => 'required',
             'id_matricula' => 'required',
             'id_seccion' => 'required',
+            'cantidad' => 'required',
         ]);
 
         $libroId = $request->input('id_libros');
