@@ -26,9 +26,15 @@ class DatabaseSeeder extends Seeder
 
     public function run(): void
     {
+        $this->call(AsignaturasSeeder::class);
+        $this->call(Ano_AcademicoSeeder::class);
+        $this->call(MatriculaSeeder::class);
+        $this->call(SeccionSeeder::class);
+
         foreach ($this->permissions as $permission) {
             Permission::create(['name' => $permission]);
         }
+
 
         $user = User::create([
             'name' => 'Prevail Ejimadu',

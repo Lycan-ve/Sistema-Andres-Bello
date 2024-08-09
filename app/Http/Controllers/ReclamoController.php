@@ -50,13 +50,6 @@ class ReclamoController extends Controller
         $libroId = $request->input('id_libros');
         $cantidad = $request->input('cantidad');
 
-       $libro = Libro::find($libroId);
-       if ($libro->cantidad >= $cantidad) {
-           $libro->cantidad -= $cantidad;
-           $libro->save();
-
-    }
-
         Reclamo::create([
             'id_libros'=> $libroId,
             'id_ano_academico' => $data['id_ano_academico'],
@@ -69,6 +62,12 @@ class ReclamoController extends Controller
         'id_matricula' => $data['id_matricula'],
         'id_seccion' => $data['id_seccion'],
         ]);
+
+        $libro = Libro::find($libroId);
+        if ($libro->cantidad >= $cantidad) {
+            $libro->cantidad -= $cantidad;
+            $libro->save();
+        }
 
         notify()->success('El Reclamo Se ha Realizado Satisfactoriamente', 'RECLAMO REALIZADO');
         return redirect()->route('Reclamos.index');
