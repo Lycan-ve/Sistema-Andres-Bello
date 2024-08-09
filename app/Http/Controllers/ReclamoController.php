@@ -20,18 +20,13 @@ class ReclamoController extends Controller
      */
     public function index(Request $request)
     {
-        $busqueda = $request->busqueda;
-        $reclamos = Reclamo::where('nombre', 'LIKE','%'.$busqueda.'%')
-                ->latest('id')
-                ->paginate(10);
-
-        $data = ['reclamos' => $reclamos];
-
         $reclamos = Reclamo::all();
         $libros = Libro::all();
         $matricula = Matricula::all();
         $seccion = Seccion::all();
-        return view('Reclamos.index', $data, compact('reclamos', 'libros', 'matricula', 'seccion'));
+        $ano_academico = Ano_Academico::all();
+        $persona = Persona::all();
+        return view('Reclamos.index', compact('reclamos', 'libros', 'matricula', 'seccion', 'ano_academico','persona'));
     }
 
     /**
@@ -49,15 +44,32 @@ class ReclamoController extends Controller
             'id_ano_academico' => 'required',
             'id_matricula' => 'required',
             'id_seccion' => 'required',
+            'cantidad' => 'required',
         ]);
 
-        $reclamos=new Reclamo;
-        $reclamos->id_libros=$request->input('id_libros');
-        $reclamos->nombre=$request->input('nombre');
-        $reclamos->cedula=$request->input('cedula');
-        $reclamos->id_matricula=$request->input('id_matricula');
-        $reclamos->id_seccion=$request->input('id_seccion');
-        $reclamos->save();
+        $libroId = $request->input('id_libros');
+        $cantidad = $request->input('cantidad');
+
+       $libro = Libro::find($libroId);
+       if ($libro->cantidad >= $cantidad) {
+           $libro->cantidad -= $cantidad;
+           $libro->save();
+
+    }
+
+        Reclamo::create([
+            'id_libros'=> $libroId,
+            'id_ano_academico' => $data['id_ano_academico'],
+            'cantidad' => $cantidad
+        ]);
+
+        Persona::create([
+        'nombre' => $data['nombre'],
+        'cedula' => $data['cedula'],
+        'id_matricula' => $data['id_matricula'],
+        'id_seccion' => $data['id_seccion'],
+        ]);
+
         notify()->success('El Reclamo Se ha Realizado Satisfactoriamente', 'RECLAMO REALIZADO');
         return redirect()->route('Reclamos.index');
 

@@ -56,7 +56,7 @@
                                         Cantidad
                                     </th>
                                     <th scope="col" class="text-center px-6 py-3">
-                                        Informacion
+                                        Acciones
                                     </th>
                                 </tr>
                             </thead>
@@ -112,5 +112,5 @@
                     </div>
                 </div>
             </div>
-            @include('Libros.modal.create')
-        @endsection
+    @include('Libros.modal.create')
+@endsection
