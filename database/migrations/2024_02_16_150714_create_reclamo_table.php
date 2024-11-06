@@ -15,17 +15,23 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('id_libros');
             $table->unsignedBigInteger('id_ano_academico');
+            $table->unsignedBigInteger('id_persona');
             $table->unsignedBigInteger('cantidad');
 
             $table->foreign('id_libros')
             ->references('id')
             ->on('libros');
 
+            $table->foreign('id_persona')
+            ->references('id')
+            ->on('persona');
+
                 $table->foreign('id_ano_academico')
                 ->references('id')
                 ->on('ano_academico');
 
-            $table->date('fecha_entrega')->nullable;
+                $table->date('fecha_entrega')->nullable(); // Hacer el campo nullable
+                $table->date('fecha_tope')->nullable();
 
             $table->timestamps();
         });

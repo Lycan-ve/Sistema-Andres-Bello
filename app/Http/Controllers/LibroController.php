@@ -26,32 +26,24 @@ class LibroController extends Controller
     }
 
     public function index(Request $request)
-    {
-        $busqueda = $request->get('busqueda');
+{
+    $busqueda = $request->get('busqueda');
 
-        $libros = Libro::where('titulo', 'LIKE','%'.$busqueda.'%')
-        ->whereHas('asignaturas', function($query) use ($busqueda) {
-            $query->where('nombre', 'LIKE', '%'.$busqueda.'%');
-        })
+    $libros = Libro::where(function($query) use ($busqueda) {
+        $query->where('titulo', 'LIKE', '%'.$busqueda.'%')
+            ->orWhereHas('asignaturas', function($q) use ($busqueda) {
+                $q->where('nombre', 'LIKE', '%'.$busqueda.'%');
+            })
+            ->orWhereHas('ano_academico', function($q) use ($busqueda) {
+                $q->where('nombre', 'LIKE', '%'.$busqueda.'%');
+            });
+    })->paginate(10);
 
-        ->whereHas('ano_academico', function ($query) use ($busqueda) {
-            $query->where('nombre', 'LIKE', '%'.$busqueda.'%');
-        })
+    $anos_academicos = Ano_Academico::all();
+    $asignaturas = Asignatura::all();
 
-        ->paginate(10);
-
-        // $libros = Libro::where('titulo', 'LIKE','%'.$busqueda.'%')
-        //         ->orWhere('id_asignaturas', 'LIKE', '%'.$busqueda.'%')
-        //         ->orWhere('id_ano_academico', 'LIKE', '%'.$busqueda.'%')
-        //         ->paginate(10);
-
-        $data = ['libros' => $libros];
-
-        $libros = Libro::all();
-        $anos_academicos = Ano_Academico::all();
-        $asignaturas = Asignatura::all();
-        return view('libros.index ', $data, compact('libros', 'anos_academicos', 'asignaturas'));
-    }
+    return view('libros.index', compact('libros', 'anos_academicos', 'asignaturas'));
+}
 
     public function create()
     {

@@ -37,7 +37,7 @@
                         N° De Libros Registrados
                     </h5>
                     <p class="mt-3 font-normal text-black dark:text-gray-400 text-center text-5xl">
-                        0
+                        {{ $CantidadLibros }}
                     </p>
                 </span>
             </a>
@@ -54,7 +54,7 @@
                         N° De Reclamos Realizados
                     </h5>
                     <p class="mt-3 font-normal text-black dark:text-gray-400 text-center text-5xl">
-                        0
+                        {{ $CantidadReclamos }}
                     </p>
                 </span>
             </a>

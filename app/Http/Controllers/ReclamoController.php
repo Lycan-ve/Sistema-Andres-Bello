@@ -11,6 +11,8 @@ use App\Models\Matricula;
 use App\Models\Ano_Academico;
 use App\Models\Seccion;
 
+use Carbon\Carbon;
+
 use Illuminate\Http\Request;
 
 class ReclamoController extends Controller
@@ -45,35 +47,52 @@ class ReclamoController extends Controller
             'id_matricula' => 'required',
             'id_seccion' => 'required',
             'cantidad' => 'required',
+            'fecha_entrega' => 'required|in:3,5,7', // Asegúrate de que este campo esté en el formulario
         ]);
 
-        $libroId = $request->input('id_libros');
-        $cantidad = $request->input('cantidad');
+        // Crear o encontrar la persona
+        $persona = Persona::firstOrCreate(
+            ['cedula' => $data['cedula']],
+            [
+                'nombre' => $data['nombre'],
+                'id_matricula' => $data['id_matricula'],
+                'id_seccion' => $data['id_seccion']
+            ]
+        );
+
+        $fechaEntrega = Carbon::now()->addDays($data['fecha_entrega']);
+        $fechaTope = $fechaEntrega->copy()->addDays(1); // Un día después de la fecha de entrega
+
+        $libro = Libro::findOrFail($data['id_libros']);
+
+        if ($libro->cantidad < $data['cantidad']) {
+            notify()->error('No hay suficientes libros disponibles', 'ERROR DE INVENTARIO');
+            return redirect()->back();
+        }
 
         Reclamo::create([
-            'id_libros'=> $libroId,
+            'id_libros' => $data['id_libros'],
             'id_ano_academico' => $data['id_ano_academico'],
-            'cantidad' => $cantidad
+            'id_persona' => $persona->id,
+            'cantidad' => $data['cantidad'],
+            'fecha_entrega' => $fechaEntrega,
+            'fecha_tope' => $fechaTope
         ]);
 
-        Persona::create([
-        'nombre' => $data['nombre'],
-        'cedula' => $data['cedula'],
-        'id_matricula' => $data['id_matricula'],
-        'id_seccion' => $data['id_seccion'],
-        ]);
-
-        $libro = Libro::find($libroId);
-        if ($libro->cantidad >= $cantidad) {
-            $libro->cantidad -= $cantidad;
-            $libro->save();
-        }
+        $libro->cantidad -= $data['cantidad'];
+        $libro->save();
 
         notify()->success('El Reclamo Se ha Realizado Satisfactoriamente', 'RECLAMO REALIZADO');
         return redirect()->route('Reclamos.index');
 
-}
+    }
 
+
+            public function personasConReclamos()
+        {
+            $personas = Persona::whereHas('reclamos')->get(['id', 'nombre', 'cedula', 'id_matricula', 'id_seccion']);
+            return response()->json($personas);
+        }
     /**
      * Display the specified resource.
      */
